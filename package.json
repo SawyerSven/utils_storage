@@ -1,0 +1,24 @@
+{
+  "name": "u-storage",
+  "version": "1.0.0",
+  "description": "操作localstorage和sessionStorage的插件",
+  "main": "index.ts",
+  "author": "sunsiyuan <sunsiyuan@17m.club>",
+  "license": "MIT",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -r ./node_modules/ts-node/register test/**/*.spec.ts"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/node": "^12.7.2",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "moment": "^2.24.0",
+    "ts-node": "^8.3.0",
+    "webpack": "^4.39.2",
+    "webpack-dev-server": "^3.8.0"
+  }
+}
