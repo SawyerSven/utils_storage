@@ -8,7 +8,8 @@ import {
   setExpires,
   isInvalidDate,
   isUndef,
-  isString
+  isString,
+  returnSotrage
 } from '../utils';
 
 class UlocalStorage implements ULocal {
@@ -37,9 +38,14 @@ class UlocalStorage implements ULocal {
     this.data.setItem(key, toStringifyJson(result));
     return sendMessageObject(200, value);
   }
-  search(key: string, isShowExpires: boolean) {
-    if (this.data.getItem(key)) {
-      return this.data.getItem(key);
+  search(key: string, isShowExpires: boolean = false) {
+    if (!isString(key))
+      throw new TypeError(
+        'first parameters of method "search" must be a string'
+      );
+    let res = toParseJson(this.data.getItem(key));
+    if (isDef(res)) {
+      return returnSotrage(res, isShowExpires);
     }
     return `not found this localStorage named ${key}`;
   }

@@ -15,13 +15,24 @@ export function isNumber(v: any): boolean {
 export function isBoolean(v: any): boolean {
   return typeof v === 'boolean';
 }
+export function isBasics(v: any): boolean {
+  return isDef(v) && (isString(v) || isNumber(v) || isBoolean(v));
+}
+export const isType = (target: any): string =>
+  Object.prototype.toString.call(target);
+
+export const isObject = target => {
+  return function(target) {
+    return Object.prototype.toString.call(target) === '[object Object]';
+  };
+};
 /**
  *
  * @export
  * @param {string} json 传递过来的可以转化的json数据
  * @returns {(object | string)}
  */
-export function toParseJson(json: string): object | string {
+export function toParseJson(json: any): any {
   let result;
   try {
     result = JSON.parse(json);
@@ -59,3 +70,6 @@ export function setExpires(target: any): Date {
   }
   return new Date();
 }
+
+// 根据传入的boolean判断是否返回对象中的expires字段,返回结果
+export function returnSotrage(data: any, isShowExpires: boolean): any {}
