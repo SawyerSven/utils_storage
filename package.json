@@ -6,7 +6,9 @@
   "author": "sunsiyuan <sunsiyuan@17m.club>",
   "license": "MIT",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -r ./node_modules/ts-node/register test/**/*.spec.ts"
+    "test": "./node_modules/.bin/mocha -r ./node_modules/ts-node/register test/**/*.spec.ts",
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server --open"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -14,11 +16,16 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
     "@types/node": "^12.7.2",
+    "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "mocha": "^6.2.0",
     "moment": "^2.24.0",
+    "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
     "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
   }
 }

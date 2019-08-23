@@ -1,18 +1,23 @@
-// JSON反序列化
+import { msgObject } from '../interface/common';
+import { basics } from '../type/storage';
 
 /**
  *
- *
+ * 返回固定格式的信息
  * @export
- * @param {string} json 传递过来的可以转化的json数据
- * @returns {(object | string)}
+ * @param {number} code
+ * @param {*} target
+ * @param {string} message
+ * @returns {object}
  */
-export function toParseJson(json: string): object | string {
-  let result;
-  try {
-    result = JSON.parse(json);
-  } catch (e) {
-    result = json;
-  }
-  return result;
+export function sendMessageObject(
+  code: number,
+  target: any,
+  message: string = 'success'
+): msgObject {
+  return {
+    code,
+    target,
+    message
+  };
 }

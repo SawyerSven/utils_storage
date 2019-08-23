@@ -1,3 +1,5 @@
 import UStorage from './core/UStorage';
 
-console.log(UStorage);
+declare var window: Window & { UStorage: any };
+
+window.UStorage = UStorage;

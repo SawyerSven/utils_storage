@@ -1,3 +1,3 @@
-export type basics = number | string | boolean;
+export type basics = number | string | any[] | object;
 
-export type expires = number | Date; 
+export type expires = number | string | Date; 

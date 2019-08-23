@@ -1,19 +1,23 @@
 import { ULocal } from '../interface/storage';
 import { basics, expires } from '../type/storage';
-import { toParseJson } from '../utils/index';
+import { toParseJson, sendMessageObject, isDef,toStringifyJson,setExpires } from '../utils/index';
 
 class UlocalStorage implements ULocal {
   data: any;
   constructor() {
     this.data = window.localStorage;
+    this.init();
   }
-  add(key: string, value: string, expires: expires) {
-    let res = this.data.setItem(key, value);
-    return {
-      code: 200,
-      target: value,
-      message: 'success'
-    };
+  add(key: string, value: basics, expires?: expires) {
+    let result = value;
+    if (isDef(expires)) {
+      result ={
+        value:value,
+        expires: setExpires(expires)
+      }
+    }
+    this.data.setItem(key, toStringifyJson(result));
+    return sendMessageObject(200, value);
   }
   search(key: string) {
     if (this.data.getItem(key)) {
@@ -23,19 +27,21 @@ class UlocalStorage implements ULocal {
   }
   remove(key: string) {
     if (this.data.getItem(key)) {
-      let target = toParseJson(<string>this.data.getItem(key));
+      let target = <basics>toParseJson(<string>this.data.getItem(key));
       this.data.removeItem(key);
-      return {
-        code: 200,
-        target,
-        message: 'success'
-      };
+      return sendMessageObject(200, target);
     }
-    return {
-      code: 404,
-      target: key,
-      message: `not found target localStorage named ${key}`
-    };
+    return sendMessageObject(
+      404,
+      key,
+      `not found target localStorage named ${key}`
+    );
+  }
+  clear() {
+    this.data.clear();
+  }
+  init() {
+    console.log(this.data);
   }
 }
 
