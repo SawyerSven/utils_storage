@@ -15,10 +15,11 @@ export interface ULocal {
    *
    * @description  查询localStorage的内容
    * @param {string} key 要查询的key
+   * @param {boolean} isShowExpires 是否显示过期时间
    * @returns {string} 返回的数据
    * @memberof ULocal
    */
-  search(key: string): string;
+  search(key: string, isShowExpires: boolean): any;
   /**
    *
    * @description 向localStorage里添加基本类型的值
@@ -38,7 +39,7 @@ export interface ULocal {
    */
   remove(key: string): msgObject; // 删除
   clear(): void; //清除
-  init():void // localStorage初始化的时
+  init(): void; // localStorage初始化的时
 }
 export interface USession {
   data: object; // localStorage对象
