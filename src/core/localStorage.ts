@@ -1,5 +1,6 @@
 import { ULocal } from '../interface/storage';
 import { basics, expires } from '../type/storage';
+import { CLEAR_TYPE } from '../utils/constant';
 import {
   toParseJson,
   sendMessageObject,
@@ -9,7 +10,8 @@ import {
   isInvalidDate,
   isUndef,
   isString,
-  returnSotrage
+  returnSotrage,
+  getAllTargetFromArray
 } from '../utils';
 
 class UlocalStorage implements ULocal {
@@ -38,12 +40,16 @@ class UlocalStorage implements ULocal {
     this.data.setItem(this.prefix + key, toStringifyJson(result));
     return sendMessageObject(200, value);
   }
-  search(key: string, withPrefix:boolean = false, isShowExpires: boolean = false) {
+  search(
+    key: string,
+    withPrefix: boolean = false,
+    isShowExpires: boolean = false
+  ) {
     if (!isString(key))
       throw new TypeError(
         'first parameters of method "search" must be a string'
       );
-    key = withPrefix? this.prefix+key : key;
+    key = withPrefix ? this.prefix + key : key;
     let res = toParseJson(this.data.getItem(key));
     if (isDef(res)) {
       return returnSotrage(res, isShowExpires);
@@ -61,6 +67,13 @@ class UlocalStorage implements ULocal {
       key,
       `not found target localStorage named ${key}`
     );
+  }
+  clearExpired(type: CLEAR_TYPE) {
+    if (isDef(type)) {
+      if (type === CLEAR_TYPE.ALL) {
+        getAllTargetFromArray(this.data)
+      }
+    }
   }
   clear() {
     this.data.clear();
