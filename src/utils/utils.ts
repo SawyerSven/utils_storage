@@ -21,11 +21,8 @@ export function isBasics(v: any): boolean {
 export const isType = (target: any): string =>
   Object.prototype.toString.call(target);
 
-export const isObject = target => {
-  return function(target) {
-    return Object.prototype.toString.call(target) === '[object Object]';
-  };
-};
+export const isObject = (target: any) =>
+  Object.prototype.toString.call(target) === '[object Object]';
 /**
  *
  * @export
@@ -72,4 +69,12 @@ export function setExpires(target: any): Date {
 }
 
 // 根据传入的boolean判断是否返回对象中的expires字段,返回结果
-export function returnSotrage(data: any, isShowExpires: boolean): any {}
+export function returnSotrage(data: any, isShowExpires: boolean): any {
+  if (isObject(data)) {
+    if (isShowExpires && data.expires) {
+      return data;
+    }
+    return data.value ? data.value : data;
+  }
+  return data;
+}
