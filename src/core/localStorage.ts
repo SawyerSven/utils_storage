@@ -11,8 +11,9 @@ import {
   isUndef,
   isString,
   returnSotrage,
-  getAllTargetFromArray
-} from '../utils';
+  getExpiredItems,
+  removeAll
+} from '../utils/index';
 
 class UlocalStorage implements ULocal {
   data: any;
@@ -22,6 +23,7 @@ class UlocalStorage implements ULocal {
     this.prefix = prefix || '';
     this.init();
   }
+
   add(key: string, value: basics, expires?: expires) {
     if (isUndef(key) || isUndef(value)) {
       throw new Error(
@@ -40,6 +42,7 @@ class UlocalStorage implements ULocal {
     this.data.setItem(this.prefix + key, toStringifyJson(result));
     return sendMessageObject(200, value);
   }
+
   search(
     key: string,
     withPrefix: boolean = false,
@@ -56,6 +59,7 @@ class UlocalStorage implements ULocal {
     }
     return `not found this localStorage named ${key}, Make sure you set the second parameter to true, which results in prefixed search results`;
   }
+
   remove(key: string) {
     if (this.data.getItem(key)) {
       let target = <basics>toParseJson(<string>this.data.getItem(key));
@@ -68,16 +72,16 @@ class UlocalStorage implements ULocal {
       `not found target localStorage named ${key}`
     );
   }
-  clearExpired(type: CLEAR_TYPE) {
-    if (isDef(type)) {
-      if (type === CLEAR_TYPE.ALL) {
-        getAllTargetFromArray(this.data)
-      }
-    }
+
+  clearExpired(type?: CLEAR_TYPE): any[] {
+    let expiredItems = getExpiredItems(this.data);
+    return removeAll(expiredItems, this);
   }
+
   clear() {
     this.data.clear();
   }
+
   init() {
     console.log(this.data);
   }

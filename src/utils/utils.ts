@@ -68,25 +68,3 @@ export function setExpires(target: any): Date {
   return new Date();
 }
 
-// 根据传入的boolean判断是否返回对象中的expires字段,返回结果
-export function returnSotrage(data: any, isShowExpires: boolean): any {
-  if (isObject(data)) {
-    if (isShowExpires && data.expires) {
-      return data;
-    }
-    return data.value ? data.value : data;
-  }
-  return data;
-}
-
-// 从某个数组中取到包含expires对象的所有对象
-export function getAllTargetFromArray(array: any, exceptPrefix?: string): any {
-  let result = {};
-  for (let key of Object.keys(array)) {
-    let data = toParseJson(array[key]);
-    if (isObject(data) && data.hasOwnProperty('expires')) {
-      console.log(data);
-    }
-  }
-  return result;
-}
