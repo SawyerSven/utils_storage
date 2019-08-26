@@ -1,5 +1,6 @@
 import { basics, expires } from '../type/storage';
 import { msgObject } from '../interface/common';
+import { CLEAR_TYPE} from '../utils/constant'
 
 export interface Storage {
   common_prefix?: string; // 通用前缀
@@ -21,7 +22,6 @@ export interface ULocal {
    * @memberof ULocal
    */
   search(key: string, withPrefix: boolean, isShowExpires: boolean): any;
-
   /**
    *
    * @description 向localStorage里添加基本类型的值
@@ -42,6 +42,7 @@ export interface ULocal {
   remove(key: string): msgObject; // 删除
   clear(): void; //清除
   init(): void; // localStorage初始化的时
+  clearExpired(type: CLEAR_TYPE): any;
 }
 export interface USession {
   data: object; // localStorage对象

@@ -78,3 +78,15 @@ export function returnSotrage(data: any, isShowExpires: boolean): any {
   }
   return data;
 }
+
+// 从某个数组中取到包含expires对象的所有对象
+export function getAllTargetFromArray(array: any, exceptPrefix?: string): any {
+  let result = {};
+  for (let key of Object.keys(array)) {
+    let data = toParseJson(array[key]);
+    if (isObject(data) && data.hasOwnProperty('expires')) {
+      console.log(data);
+    }
+  }
+  return result;
+}
