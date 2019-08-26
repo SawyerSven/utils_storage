@@ -1,6 +1,6 @@
-import { ULocal } from '../interface/storage';
-import { basics, expires } from '../type/storage';
-import { CLEAR_TYPE } from '../utils/constant';
+import { ULocal } from "../interface/storage";
+import { basics, expires } from "../type/storage";
+import { CLEAR_TYPE } from "../utils/constant";
 import {
   toParseJson,
   sendMessageObject,
@@ -13,14 +13,14 @@ import {
   returnSotrage,
   getExpiredItems,
   removeAll
-} from '../utils/index';
+} from "../utils/index";
 
 class UlocalStorage implements ULocal {
   data: any;
   prefix: string;
   constructor(prefix: any) {
     this.data = window.localStorage;
-    this.prefix = prefix || '';
+    this.prefix = prefix || "";
     this.init();
   }
 
