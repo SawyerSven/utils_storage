@@ -14,16 +14,16 @@ import {
 
 class UlocalStorage implements ULocal {
   data: any;
-  constructor() {
+  prefix: string;
+  constructor(prefix: any) {
     this.data = window.localStorage;
+    this.prefix = prefix || '';
     this.init();
   }
   add(key: string, value: basics, expires?: expires) {
     if (isUndef(key) || isUndef(value)) {
       throw new Error(
-        `methods "add" has at least two parameters, bug got 2(${
-          arguments.length
-        }) params`
+        `methods "add" has at least two parameters, bug got 2(${arguments.length}) params`
       );
     }
     if (!isString(key))
@@ -35,19 +35,20 @@ class UlocalStorage implements ULocal {
         expires: setExpires(expires)
       };
     }
-    this.data.setItem(key, toStringifyJson(result));
+    this.data.setItem(this.prefix + key, toStringifyJson(result));
     return sendMessageObject(200, value);
   }
-  search(key: string, isShowExpires: boolean = false) {
+  search(key: string, withPrefix:boolean = false, isShowExpires: boolean = false) {
     if (!isString(key))
       throw new TypeError(
         'first parameters of method "search" must be a string'
       );
+    key = withPrefix? this.prefix+key : key;
     let res = toParseJson(this.data.getItem(key));
     if (isDef(res)) {
       return returnSotrage(res, isShowExpires);
     }
-    return `not found this localStorage named ${key}`;
+    return `not found this localStorage named ${key}, Make sure you set the second parameter to true, which results in prefixed search results`;
   }
   remove(key: string) {
     if (this.data.getItem(key)) {

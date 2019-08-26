@@ -11,6 +11,7 @@ export interface Storage {
 
 export interface ULocal {
   data: object; // localStorage对象
+  prefix: string;
   /**
    *
    * @description  查询localStorage的内容
@@ -19,7 +20,8 @@ export interface ULocal {
    * @returns {string} 返回的数据
    * @memberof ULocal
    */
-  search(key: string, isShowExpires: boolean): any;
+  search(key: string, withPrefix: boolean, isShowExpires: boolean): any;
+
   /**
    *
    * @description 向localStorage里添加基本类型的值
