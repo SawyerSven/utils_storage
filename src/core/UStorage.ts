@@ -8,7 +8,7 @@ class UStorage implements Storage {
   session: USession;
   constructor(commonPrefix?: string) {
     this.local = new UlocalStorage(commonPrefix);
-    this.session = new USessionStorage();
+    this.session = new USessionStorage(commonPrefix);
   }
 }
 

@@ -46,6 +46,7 @@ export interface ULocal {
 }
 export interface USession {
   data: object; // localStorage对象
+  prefix:string;
   search(key: string): string; // 查询
   add(key: string, value: string): msgObject; // 新增
   remove(key: string): msgObject; // 删除

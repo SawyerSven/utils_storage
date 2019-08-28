@@ -67,4 +67,3 @@ export function setExpires(target: any): Date {
   }
   return new Date();
 }
-
