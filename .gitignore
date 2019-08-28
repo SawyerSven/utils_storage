@@ -1,4 +1,6 @@
 node_modules
 src/**/*.js
+.nyc_output
 !src/index.js
 dist
+test/coverage

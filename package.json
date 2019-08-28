@@ -6,15 +6,41 @@
   "author": "sunsiyuan <sunsiyuan@17m.club>",
   "license": "MIT",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -r ./node_modules/ts-node/register test/**/*.spec.ts",
+    "test": "nyc mocha",
     "build": "webpack --config webpack.config.js",
     "start": "webpack-dev-server --open"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "report-dir": "./test/coverage",
+    "sourceMap": true,
+    "instrument": true,
+    "all": true
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
@@ -22,12 +48,16 @@
     "html-webpack-plugin": "^3.2.0",
     "mocha": "^6.2.0",
     "moment": "^2.24.0",
+    "nyc": "^14.1.1",
+    "source-map-support": "^0.5.13",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "typescript": "^3.5.3"
   }
 }
