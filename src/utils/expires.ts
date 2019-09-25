@@ -10,7 +10,7 @@ type storage = string | number | object | any[]
  */
 export function setExpiresToStorage(storage: storage, expires: expires): object {
   let value = toStringifyJson(storage);
-  let exprTime = setExpires(expires);
+  // let exprTime = setExpires(expires);
   return {
     value,
     expires

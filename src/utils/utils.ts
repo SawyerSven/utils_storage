@@ -54,7 +54,7 @@ export function toStringifyJson(target: any): string | number {
 }
 
 // 设置过期时间
-export function setExpires(target: any): Date {
+export function setExpires(target?: any): Date {
   if (isNumber(target)) {
     return afterSomeDay(target);
   }

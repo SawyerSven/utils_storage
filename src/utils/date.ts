@@ -6,11 +6,11 @@ export function now(): Date {
 }
 /* 获取N天以后的日期对象 */
 export function afterSomeDay(day: number): Date {
-  if (!isNumber(day)) {
-    throw new TypeError(
-      'first argument of function afterSomeDay must be a number'
-    );
-  }
+  // if (!isNumber(day)) {
+  //   throw new TypeError(
+  //     'first argument of function afterSomeDay must be a number'
+  //   );
+  // }
   if (day < 0) {
     throw new RangeError(
       'first argument of function "afterSomeDay" must be greater than 0'
@@ -23,11 +23,11 @@ export function afterSomeDay(day: number): Date {
 
 // 通过传入类似'2019-08-23'来获取合法的日期对象
 export function getDayFromString(date: string): Date {
-  if (!isString(date)) {
-    throw new TypeError(
-      `argument of function "getDayFromString" expect a string but got ${typeof date}`
-    );
-  }
+  // if (!isString(date)) {
+  //   throw new TypeError(
+  //     `argument of function "getDayFromString" expect a string but got ${typeof date}`
+  //   );
+  // }
   let targetDate = new Date(date);
   if (isInvalidDate(targetDate)) console.warn('got a InvalidDate');
   return targetDate;
